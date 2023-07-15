@@ -33,6 +33,10 @@ public class SnakeLogic : MonoBehaviour
     }
     private void MoveSnake()
     {
+        for(int i=_segments.Count - 1; i>0; i--)
+        {
+            _segments[i].position = _segments[i-1].position;
+        }
         
         this.transform.position = new Vector3(
                 Mathf.Round(this.transform.position.x) + _direction.x,
