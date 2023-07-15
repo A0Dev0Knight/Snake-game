@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 public class SnakeLogic : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class SnakeLogic : MonoBehaviour
         MoveSnake();
     }
 
+    //This function adds the segments to the body
     private void Grow()
     {
         Transform segment = Instantiate(this.SnakeSegmentPf);
@@ -33,11 +35,13 @@ public class SnakeLogic : MonoBehaviour
     }
     private void MoveSnake()
     {
+        //This line of code moves the body of the snake
         for(int i=_segments.Count - 1; i>0; i--)
         {
             _segments[i].position = _segments[i-1].position;
         }
         
+        //This line of code moves the head of the snake
         this.transform.position = new Vector3(
                 Mathf.Round(this.transform.position.x) + _direction.x,
                 Mathf.Round(this.transform.position.y) + _direction.y,
@@ -50,8 +54,26 @@ public class SnakeLogic : MonoBehaviour
         if (other.tag == "Food")
         {
             Grow();
+        } else if( other.tag == "Obstacle")
+        {
+            GameOver();
+            Debug.Log("AUUU");
         }
     }
+
+    private void GameOver()
+    {
+        //Clears the body of the snake
+        for(int i = 1; i<_segments.Count; i++)
+        {
+            Destroy(_segments[i].gameObject);
+        }
+        _segments.Clear();
+        _segments.Add(this.transform);
+
+        transform.position = Vector3.zero;
+    }
+
     private void InputCheck()
     {
         if (Input.GetKeyDown(KeyCode.W))
