@@ -839,6 +839,11 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 5564725759095458560, guid: 8e8820d74da160a4384596f2656285c2,
         type: 3}
+      propertyPath: IniSizeSnake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5564725759095458560, guid: 8e8820d74da160a4384596f2656285c2,
+        type: 3}
       propertyPath: SnakeSegmentPf
       value: 
       objectReference: {fileID: 485641835470802998, guid: 4efc6901cbc594542b60e02bfba67193,

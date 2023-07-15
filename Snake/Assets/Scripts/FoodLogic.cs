@@ -32,6 +32,13 @@ public class FoodLogic : MonoBehaviour
             RandomPozition();
             
         }
+        else
+        {
+            while(other.tag == "Obstacle")
+            {
+                RandomPozition();
+            }
+        }
 
     }
 

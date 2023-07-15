@@ -8,12 +8,11 @@ public class SnakeLogic : MonoBehaviour
     Transform SnakeSegmentPf;
 
     private Vector2 _direction = Vector2.right;
-    private List<Transform> _segments;
+    private List<Transform> _segments = new List<Transform>();
 
     private void Start()
     {
-        _segments = new List<Transform>();
-        _segments.Add(this.transform);
+        GameOver();
     }
 
     private void Update()
@@ -57,7 +56,6 @@ public class SnakeLogic : MonoBehaviour
         } else if( other.tag == "Obstacle")
         {
             GameOver();
-            Debug.Log("AUUU");
         }
     }
 
@@ -70,7 +68,7 @@ public class SnakeLogic : MonoBehaviour
         }
         _segments.Clear();
         _segments.Add(this.transform);
-
+        
         transform.position = Vector3.zero;
     }
 
