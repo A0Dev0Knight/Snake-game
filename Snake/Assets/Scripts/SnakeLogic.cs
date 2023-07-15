@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SnakeLogic : MonoBehaviour
 {
@@ -18,6 +16,7 @@ public class SnakeLogic : MonoBehaviour
 
     private void MoveSnake()
     {
+        
         transform.position = new Vector3(
                 Mathf.Round(transform.position.x) + _direction.x,
                 Mathf.Round(transform.position.y) + _direction.y,
@@ -29,16 +28,13 @@ public class SnakeLogic : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.W))
         {
             _direction = Vector2.up;
-        }
-        else if (Input.GetKeyDown(KeyCode.S))
+        } else if (Input.GetKeyDown(KeyCode.S))
         {
             _direction = Vector2.down;
-        }
-        else if (Input.GetKeyDown(KeyCode.A))
+        } else if (Input.GetKeyDown(KeyCode.A))
         {
             _direction = Vector2.left;
-        }
-        else if (Input.GetKeyDown(KeyCode.D))
+        } else if (Input.GetKeyDown(KeyCode.D))
         {
             _direction = Vector2.right;
         }
