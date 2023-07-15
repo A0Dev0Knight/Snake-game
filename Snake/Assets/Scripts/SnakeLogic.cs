@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 public class SnakeLogic : MonoBehaviour
 {
+    [SerializeField]
+    Transform SnakeSegmentPf;
+
     private Vector2 _direction = Vector2.right;
     private List<Transform> _segments;
 
@@ -22,6 +25,12 @@ public class SnakeLogic : MonoBehaviour
         MoveSnake();
     }
 
+    private void Grow()
+    {
+        Transform segment = Instantiate(this.SnakeSegmentPf);
+        segment.position = _segments[_segments.Count - 1].position ;
+        _segments.Add(segment);
+    }
     private void MoveSnake()
     {
         
@@ -30,6 +39,14 @@ public class SnakeLogic : MonoBehaviour
                 Mathf.Round(this.transform.position.y) + _direction.y,
                 0.0f
             );
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Food")
+        {
+            Grow();
+        }
     }
     private void InputCheck()
     {
