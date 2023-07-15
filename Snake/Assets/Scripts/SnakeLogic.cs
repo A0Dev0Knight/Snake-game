@@ -1,8 +1,16 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 public class SnakeLogic : MonoBehaviour
 {
     private Vector2 _direction = Vector2.right;
+    private List<Transform> _segments;
+
+    private void Start()
+    {
+        _segments = new List<Transform>();
+        _segments.Add(this.transform);
+    }
 
     private void Update()
     {
@@ -17,9 +25,9 @@ public class SnakeLogic : MonoBehaviour
     private void MoveSnake()
     {
         
-        transform.position = new Vector3(
-                Mathf.Round(transform.position.x) + _direction.x,
-                Mathf.Round(transform.position.y) + _direction.y,
+        this.transform.position = new Vector3(
+                Mathf.Round(this.transform.position.x) + _direction.x,
+                Mathf.Round(this.transform.position.y) + _direction.y,
                 0.0f
             );
     }
