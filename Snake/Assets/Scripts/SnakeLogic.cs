@@ -103,6 +103,7 @@ public class SnakeLogic : MonoBehaviour
 
     private void RestartRound()
     {
+        if (_score > PlayerPrefs.GetInt("HighScore", 0)) PlayerPrefs.SetInt("HighScore", _score);
         _score = 0;
         ScoreText.text = _score.ToString();
 
