@@ -136,7 +136,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &21493395
 Transform:
   m_ObjectHideFlags: 0
@@ -1261,6 +1261,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GridArea: {fileID: 1752434982}
   FruitValue: 1
+  TimerToGetFruit: 1
 --- !u!1 &1178111575
 GameObject:
   m_ObjectHideFlags: 0
@@ -1470,6 +1471,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GridArea: {fileID: 1752434982}
   FruitValue: 5
+  TimerToGetFruit: 1
 --- !u!1 &1335118149
 GameObject:
   m_ObjectHideFlags: 0

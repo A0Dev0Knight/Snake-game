@@ -14,6 +14,8 @@ public class FoodLogic : MonoBehaviour
     [SerializeField]
     float TimerToGetFruit = .05f;
 
+    //Adding a timer might not work because of the time variables
+    //i have previuosly changed in the project settings
     private void TimeLeft()
     {
         float TimeUntilKilled = TimerToGetFruit;
