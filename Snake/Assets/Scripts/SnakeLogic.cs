@@ -83,14 +83,22 @@ public class SnakeLogic : MonoBehaviour
     {
         if (other.tag == "Food")
         {
-            GameObject food = other.gameObject;
-            _score += food.GetComponent<FoodLogic>().PointsPerFruit();
-            ScoreText.text = _score.ToString();
-            Grow();
+            SnakeScoreSize(other);
         } else if( other.tag == "Obstacle")
         {
             RestartRound();
         }
+    }
+
+    private void SnakeScoreSize(Collider2D other)
+    {
+        GameObject food = other.gameObject;
+        int fruitPoints = food.GetComponent<FoodLogic>().PointsPerFruit();
+        _score += fruitPoints;
+        ScoreText.text = _score.ToString();
+
+        for (int i=0;i<fruitPoints;i++) Grow();
+
     }
 
     private void RestartRound()
