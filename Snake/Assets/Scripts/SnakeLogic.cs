@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System;
+using UnityEngine.UI;
 
 public class SnakeLogic : MonoBehaviour
 {
@@ -12,6 +13,10 @@ public class SnakeLogic : MonoBehaviour
     [SerializeField]
     int SnakeSize =1;
 
+    [SerializeField]
+    Text ScoreText;
+
+    private int _score = 0;
     private Vector2 _direction = Vector2.right;
     private List<Transform> _segments = new List<Transform>();
 
@@ -78,6 +83,9 @@ public class SnakeLogic : MonoBehaviour
     {
         if (other.tag == "Food")
         {
+            GameObject food = other.gameObject;
+            _score += food.GetComponent<FoodLogic>().PointsPerFruit();
+            ScoreText.text = _score.ToString();
             Grow();
         } else if( other.tag == "Obstacle")
         {
@@ -87,8 +95,11 @@ public class SnakeLogic : MonoBehaviour
 
     private void RestartRound()
     {
+        _score = 0;
+        ScoreText.text = _score.ToString();
+
         //Clears the body of the snake
-        for(int i = 1; i<_segments.Count; i++)
+        for (int i = 1; i<_segments.Count; i++)
         {
             Destroy(_segments[i].gameObject);
         }
