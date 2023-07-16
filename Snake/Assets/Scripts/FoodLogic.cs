@@ -11,11 +11,33 @@ public class FoodLogic : MonoBehaviour
     [SerializeField]
     int FruitValue = 1;
 
+    [SerializeField]
+    float TimerToGetFruit = .05f;
+
+    private void TimeLeft()
+    {
+        float TimeUntilKilled = TimerToGetFruit;
+        if (TimeUntilKilled > 0)
+        {
+            TimeUntilKilled -= Time.deltaTime;
+            Debug.Log(TimeUntilKilled);
+        }
+        else 
+        {
+            TimeUntilKilled = 0;
+            RandomPozition();
+        } 
+    }
+
     private void Start()
     {
         RandomPozition();
     }
-
+    //private void Update()
+    //{
+    //    TimeLeft();
+    //}
+    //this code helps me get the value of the fruit from other scripts
     public int PointsPerFruit()
     {
         return FruitValue;
@@ -39,7 +61,8 @@ public class FoodLogic : MonoBehaviour
                 );
     }
 
-    //if we meet the snake move else move
+    //if we meet the snake move
+    //  else move
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
