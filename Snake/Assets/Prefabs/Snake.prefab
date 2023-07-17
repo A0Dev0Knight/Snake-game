@@ -145,6 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SnakeSegmentPf: {fileID: 0}
+  SnakeTailPf: {fileID: 0}
   SnakeSize: 1
   ScoreText: {fileID: 0}
 --- !u!1 &7608369894181490270

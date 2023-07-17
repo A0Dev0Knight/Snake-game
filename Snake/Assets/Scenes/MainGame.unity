@@ -168,6 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03fa7b48dcd9e9749bb1799a7d4759bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HighScoreText: {fileID: 811153109}
 --- !u!1001 &36882709
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1693,7 +1694,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PauseMenu: {fileID: 21493394}
-  HighScoreText: {fileID: 811153109}
 --- !u!4 &1335118151
 Transform:
   m_ObjectHideFlags: 0
