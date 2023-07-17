@@ -5,9 +5,14 @@ using UnityEngine.UI;
 
 public class SnakeLogic : MonoBehaviour
 {
+    #region VARIABLES
     //reference to snake body
     [SerializeField]
     Transform SnakeSegmentPf;
+
+    //reference to snake tail
+    [SerializeField]
+    Transform SnakeTailPf;
 
     //set the initial size of the snake
     [SerializeField]
@@ -21,12 +26,15 @@ public class SnakeLogic : MonoBehaviour
     private int _rotation;
     private List<Transform> _segments = new List<Transform>();
 
+    #endregion
     private void Start()
     {
         RestartRound();
     }
 
     //check input from user
+    #region Input
+
     private void Update()
     {
         InputCheck();
@@ -57,8 +65,10 @@ public class SnakeLogic : MonoBehaviour
 
         }
     }
-
+    #endregion
+    
     //move the snake
+    #region MOVE SNAKE
     private void FixedUpdate()
     {
         MoveSnake();
@@ -78,16 +88,44 @@ public class SnakeLogic : MonoBehaviour
                 Mathf.Round(this.transform.position.y) + _direction.y,
                 0.0f
             );
+        //these line rotate the head accordingly
         Vector3 rotate = new Vector3(0, 0, _rotation);
         this.transform.rotation = Quaternion.Euler(rotate);
     }
-
+    #endregion
+    
+    private void SetTailOfSnake()
+    {
+        //Get rid of the body game object
+       // Destroy(_segments[_segments.Count-1].gameObject);
+        //Remove that element from list
+       // _segments.RemoveAt(_segments.Count - 1);
+        //adding the tail instead
+        _segments.Add(Instantiate(SnakeTailPf));
+    }
     //This function adds the segments to the body
     private void Grow()
     {
         Transform segment = Instantiate(this.SnakeSegmentPf);
-        segment.position = _segments[_segments.Count - 1].position ;
+        
+
+        //replaces the tail with a body part
+        if (_segments.Count > 1)
+        {
+            //Get rid of the tail game object
+            Destroy(_segments[_segments.Count - 1].gameObject);
+            //Remove that element from list
+            _segments.RemoveAt(_segments.Count - 1);
+            //adding the body back
+            _segments.Add(Instantiate(segment));
+        }
+               
         _segments.Add(segment);
+
+        SetTailOfSnake();
+
+        segment.position = _segments[_segments.Count - 1].position;
+        segment.rotation = _segments[_segments.Count - 1].rotation;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -101,6 +139,7 @@ public class SnakeLogic : MonoBehaviour
         }
     }
 
+    //this function calculates the score and the initial size of the snake
     private void SnakeScoreSize(Collider2D other)
     {
         GameObject food = other.gameObject;
@@ -114,6 +153,7 @@ public class SnakeLogic : MonoBehaviour
 
     private void RestartRound()
     {
+        //handle the high score
         if (_score > PlayerPrefs.GetInt("HighScore", 0)) PlayerPrefs.SetInt("HighScore", _score);
         _score = 0;
         ScoreText.text = _score.ToString();
@@ -125,13 +165,16 @@ public class SnakeLogic : MonoBehaviour
         }
         _segments.Clear();
 
-        //remake the original snake
+        //remake the original snake:
+
+        //add the head
         _segments.Add(this.transform);
+
+        //add the rest of the body segments
         for (int i = 1; i < SnakeSize; i++)
         {
-            _segments.Add(Instantiate(SnakeSegmentPf));
+            Grow();
         }
-        
         transform.position = Vector3.zero;
     }
 
