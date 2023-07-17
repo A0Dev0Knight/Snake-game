@@ -9,6 +9,12 @@ public class MenuLogic : MonoBehaviour
     {
         SceneManager.LoadScene(1);
     }
+    public void BackToMainMenu()
+    {
+        Time.timeScale = 1.0f;
+        SceneManager.LoadScene(0);
+    }
+
     public void QuitGame()
     {
         Application.Quit();
