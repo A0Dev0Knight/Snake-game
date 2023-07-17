@@ -18,6 +18,7 @@ public class SnakeLogic : MonoBehaviour
 
     private int _score = 0;
     private Vector2 _direction = Vector2.right;
+    private int _rotation;
     private List<Transform> _segments = new List<Transform>();
 
     private void Start()
@@ -35,18 +36,25 @@ public class SnakeLogic : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
         {
             _direction = Vector2.up;
+            _rotation = 90;
         }
         else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
         {
             _direction = Vector2.down;
+            _rotation = -90;
+
         }
         else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
         {
             _direction = Vector2.left;
+            _rotation = 180;
+
         }
         else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
         {
             _direction = Vector2.right;
+            _rotation = 0;
+
         }
     }
 
@@ -61,6 +69,7 @@ public class SnakeLogic : MonoBehaviour
         for (int i = _segments.Count - 1; i > 0; i--)
         {
             _segments[i].position = _segments[i - 1].position;
+            _segments[i].rotation = _segments[i - 1].rotation;
         }
 
         //This line of code moves the head of the snake
@@ -69,6 +78,8 @@ public class SnakeLogic : MonoBehaviour
                 Mathf.Round(this.transform.position.y) + _direction.y,
                 0.0f
             );
+        Vector3 rotate = new Vector3(0, 0, _rotation);
+        this.transform.rotation = Quaternion.Euler(rotate);
     }
 
     //This function adds the segments to the body
