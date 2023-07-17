@@ -116,16 +116,14 @@ public class SnakeLogic : MonoBehaviour
             Destroy(_segments[_segments.Count - 1].gameObject);
             //Remove that element from list
             _segments.RemoveAt(_segments.Count - 1);
-            //adding the body back
-            _segments.Add(Instantiate(segment));
         }
                
         _segments.Add(segment);
 
         SetTailOfSnake();
 
-        segment.position = _segments[_segments.Count - 1].position;
-        segment.rotation = _segments[_segments.Count - 1].rotation;
+        segment.position = _segments[_segments.Count - 2].position;
+        segment.rotation = _segments[_segments.Count - 2].rotation;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
